@@ -6,7 +6,7 @@ namespace CasAuthenticationMiddleware
 {
     public static class CasAppBuilderExtensions
     {
-        public static IApplicationBuilder UseCasAutentication(this IApplicationBuilder app)
+        public static IApplicationBuilder UseCasAuthentication(this IApplicationBuilder app)
         {
             if (app == null)
             {
