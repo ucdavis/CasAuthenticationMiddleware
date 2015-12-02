@@ -3,18 +3,20 @@ using Microsoft.AspNet.Authentication;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.DataProtection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.OptionsModel;
 using Microsoft.Extensions.WebEncoders;
 
 namespace CasAuthenticationMiddleware
 {
-    public class CasAuthenticationMiddleware : AuthenticationMiddleware<CasAuthenticationOptions>
+    public class CasAuthenticationMiddleware<TOptions> : AuthenticationMiddleware<TOptions> where TOptions : CasAuthenticationOptions, new()
     {
         public CasAuthenticationMiddleware(
             RequestDelegate next,
             IDataProtectionProvider dataProtectionProvider,
             ILoggerFactory loggerFactory,
             IUrlEncoder urlEncoder,
-            CasAuthenticationOptions options)
+            IOptions<SharedAuthenticationOptions> sharedOptions,
+            TOptions options)
             : base(next, options, loggerFactory, urlEncoder)
         {
             if (next == null)
@@ -37,15 +39,25 @@ namespace CasAuthenticationMiddleware
                 throw new ArgumentNullException(nameof(urlEncoder));
             }
 
+            if (sharedOptions == null)
+            {
+                throw new ArgumentNullException(nameof(sharedOptions));
+            }
+
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
+
+            if (string.IsNullOrEmpty(Options.SignInScheme))
+            {
+                Options.SignInScheme = sharedOptions.Value.SignInScheme;
+            }
         }
 
-        protected override AuthenticationHandler<CasAuthenticationOptions> CreateHandler()
+        protected override AuthenticationHandler<TOptions> CreateHandler()
         {
-            return new CasAuthenticationHandler();
+            return new CasAuthenticationHandler<TOptions>();
         }
     }
 }

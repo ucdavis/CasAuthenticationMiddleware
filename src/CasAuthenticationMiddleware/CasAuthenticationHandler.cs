@@ -6,7 +6,7 @@ using Microsoft.AspNet.Http.Features.Authentication;
 
 namespace CasAuthenticationMiddleware
 {
-    internal class CasAuthenticationHandler : RemoteAuthenticationHandler<CasAuthenticationOptions>
+    internal class CasAuthenticationHandler<TOptions> : RemoteAuthenticationHandler<TOptions> where TOptions : CasAuthenticationOptions
     {
         protected override async Task<AuthenticateResult> HandleRemoteAuthenticateAsync()
         {

@@ -15,7 +15,7 @@ namespace CasAuthenticationMiddleware
 
             //TODO: allow options
             return
-                app.UseMiddleware<CasAuthenticationMiddleware>(new CasAuthenticationOptions
+                app.UseMiddleware<CasAuthenticationMiddleware<CasAuthenticationOptions>>(new CasAuthenticationOptions
                 {
                     CallbackPath = new PathString("/Home/CasLogin"),
                     AuthenticationScheme = "Cas",
