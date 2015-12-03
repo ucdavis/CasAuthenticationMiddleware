@@ -7,7 +7,6 @@ using Microsoft.AspNet.Mvc;
 
 namespace CasAuthenticationSample.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -15,6 +14,7 @@ namespace CasAuthenticationSample.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

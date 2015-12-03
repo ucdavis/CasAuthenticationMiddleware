@@ -6,16 +6,18 @@ using Microsoft.AspNet.Http.Features.Authentication;
 
 namespace CasAuthenticationMiddleware
 {
-    internal class CasAuthenticationHandler<TOptions> : RemoteAuthenticationHandler<TOptions> where TOptions : CasAuthenticationOptions
+    public class CasAuthenticationHandler<TOptions> : RemoteAuthenticationHandler<TOptions> where TOptions : CasAuthenticationOptions
     {
         protected override async Task<AuthenticateResult> HandleRemoteAuthenticateAsync()
         {
+            var query = Context.Request.Query;
             var identity = new ClaimsIdentity(Options.ClaimsIssuer);
             identity.AddClaim(new Claim("name", "postit", ClaimValueTypes.String, Options.ClaimsIssuer));
             var principal = new ClaimsPrincipal(identity);
 
             var authTicket = new AuthenticationTicket(principal, new AuthenticationProperties(), "CAS");
 
+            var uri = CurrentUri;
             return await Task.FromResult(AuthenticateResult.Success(authTicket));
         }
 

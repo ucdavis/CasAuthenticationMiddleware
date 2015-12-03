@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using CasAuthenticationMiddleware;
 using CasAuthenticationMiddleware;
+using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Http.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -28,6 +31,8 @@ namespace CasAuthenticationSample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(sharedOptions => sharedOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+
             // Add framework services.
             services.AddMvc();
         }
@@ -52,7 +57,26 @@ namespace CasAuthenticationSample
 
             app.UseStaticFiles();
 
-            app.UseCasAuthentication();
+            app.UseCookieAuthentication(options =>
+            {
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = true;
+                options.LoginPath = new PathString("/home/caslogin");
+            });
+
+            //TODO: allow options
+            var casoptions = new CasAuthenticationOptions
+            {
+                AuthenticationScheme = "UCDCAS",
+                AuthorizationEndpoint = "https://cas.ucdavis.edu/cas/",
+                CallbackPath = new PathString("/Home/caslogin"),
+                DisplayName = "CAS",
+                ClaimsIssuer = "Cas",
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            };
+            
+            app.UseCasAuthentication(casoptions);
 
             app.UseMvc(routes =>
             {

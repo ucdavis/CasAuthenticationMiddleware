@@ -6,24 +6,14 @@ namespace CasAuthenticationMiddleware
 {
     public static class CasAppBuilderExtensions
     {
-        public static IApplicationBuilder UseCasAuthentication(this IApplicationBuilder app)
+        public static IApplicationBuilder UseCasAuthentication(this IApplicationBuilder app, CasAuthenticationOptions options)
         {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            //TODO: allow options
-            return
-                app.UseMiddleware<CasAuthenticationMiddleware<CasAuthenticationOptions>>(new CasAuthenticationOptions
-                {
-                    CallbackPath = new PathString("/Home/CasLogin"),
-                    AuthenticationScheme = "Cas",
-                    DisplayName = "CAS",
-                    ClaimsIssuer = "Cas",
-                    AutomaticAuthenticate = true,
-                    AutomaticChallenge = true
-                });
+            return app.UseMiddleware<CasAuthenticationMiddleware<CasAuthenticationOptions>>(options);
         }
     }
 }
