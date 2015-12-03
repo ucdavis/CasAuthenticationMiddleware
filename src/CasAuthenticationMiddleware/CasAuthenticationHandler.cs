@@ -12,7 +12,7 @@ namespace CasAuthenticationMiddleware
         {
             var query = Context.Request.Query;
             var identity = new ClaimsIdentity(Options.ClaimsIssuer);
-            identity.AddClaim(new Claim("name", "postit", ClaimValueTypes.String, Options.ClaimsIssuer));
+            identity.AddClaim(new Claim(ClaimTypes.Name, "postit", ClaimValueTypes.String, Options.ClaimsIssuer));
             var principal = new ClaimsPrincipal(identity);
 
             var authTicket = new AuthenticationTicket(principal, new AuthenticationProperties(), "CAS");

@@ -17,7 +17,7 @@ namespace CasAuthenticationSample.Controllers
         [Authorize]
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Your application description page. "  + User.Identity.Name;
 
             return View();
         }
