@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using Microsoft.AspNet.Authentication;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.DataProtection;
@@ -49,15 +50,22 @@ namespace CasAuthenticationMiddleware
                 throw new ArgumentNullException(nameof(options));
             }
 
+            Backchannel = new HttpClient(Options.BackchannelHttpHandler ?? new HttpClientHandler());
+            Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd("CAS Authentication middleware");
+            Backchannel.Timeout = Options.BackchannelTimeout;
+            Backchannel.MaxResponseContentBufferSize = 1024 * 1024 * 10; // 10 MB
+
             if (string.IsNullOrEmpty(Options.SignInScheme))
             {
                 Options.SignInScheme = sharedOptions.Value.SignInScheme;
             }
         }
 
+        protected HttpClient Backchannel { get; private set; }
+
         protected override AuthenticationHandler<TOptions> CreateHandler()
         {
-            return new CasAuthenticationHandler<TOptions>();
+            return new CasAuthenticationHandler<TOptions>(Backchannel);
         }
     }
 }
