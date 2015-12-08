@@ -51,7 +51,7 @@ namespace CasAuthenticationMiddleware
 
         protected override async Task<bool> HandleUnauthorizedAsync(ChallengeContext context)
         {
-            var authorizationEndpoint = Options.AuthorizationEndpoint + "login?service=" + BuildRedirectUri(Options.CallbackPath) + "?" + StrReturnUrl + "=" + Context.Request.Path;
+            var authorizationEndpoint = Options.AuthorizationEndpoint + "login?service=" + BuildRedirectUri(Options.CallbackPath) + "?" + StrReturnUrl + "=" + Context.Request.Path + Context.Request.QueryString;
 
             Context.Response.Redirect(authorizationEndpoint);
 
