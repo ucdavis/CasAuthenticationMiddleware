@@ -63,9 +63,8 @@ namespace CasAuthenticationSample
                 options.AutomaticChallenge = true;
                 options.LoginPath = new PathString("/home/caslogin");
             });
-
-            //TODO: allow options
-            var casoptions = new CasAuthenticationOptions
+            
+            app.UseCasAuthentication(new CasAuthenticationOptions
             {
                 AuthenticationScheme = "UCDCAS",
                 AuthorizationEndpoint = "https://cas.ucdavis.edu/cas/",
@@ -74,9 +73,7 @@ namespace CasAuthenticationSample
                 ClaimsIssuer = "Cas",
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true
-            };
-            
-            app.UseCasAuthentication(casoptions);
+            });
 
             app.UseMvc(routes =>
             {
