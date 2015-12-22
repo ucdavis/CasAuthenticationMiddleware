@@ -1,10 +1,11 @@
 ﻿{
   "version": "0.5.0-*",
-  "description": "Cas Authentication Middleware ",
+  "title": "Cas Authentication Middleware",
+  "description": "Cas Authentication Middleware",
   "authors": [ "Scott Kirkland" ],
   "tags": [ "" ],
   "projectUrl": "https://github.com/ucdavis/CasAuthenticationMiddleware",
-  "licenseUrl": "",
+  "licenseUrl": "https://github.com/ucdavis/CasAuthenticationMiddleware/blob/master/LICENSE.txt",
   "dependencies": {
     "Microsoft.AspNet.Authentication": "1.0.0-*"
   },
