@@ -6,7 +6,7 @@
   },
 
   "dependencies": {
-    "CasAuthenticationMiddleware": "0.5.0-*",
+    "CasAuthenticationMiddleware": "1.0.0-*",
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
       "type": "platform"
