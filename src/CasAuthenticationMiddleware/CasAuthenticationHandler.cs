@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Http.Authentication;
-using Microsoft.AspNet.Http.Features.Authentication;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.AspNetCore.Http.Features.Authentication;
+using Microsoft.AspNetCore.Http;
 
 namespace CasAuthenticationMiddleware
 {
@@ -44,7 +44,7 @@ namespace CasAuthenticationMiddleware
 
             if (string.IsNullOrWhiteSpace(ticket))
             {
-                return AuthenticateResult.Failed("No authorization ticket found");
+                return AuthenticateResult.Fail("No authorization ticket found");
             }
 
             var responseStream =
@@ -72,7 +72,7 @@ namespace CasAuthenticationMiddleware
                 }
                 else
                 {
-                    return AuthenticateResult.Failed("Invalid ticket");
+                    return AuthenticateResult.Fail("Invalid ticket");
                 }
             }
         }

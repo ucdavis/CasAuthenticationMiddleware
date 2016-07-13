@@ -1,11 +1,11 @@
 using System;
 using System.Net.Http;
-using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.DataProtection;
+using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.OptionsModel;
-using Microsoft.Extensions.WebEncoders;
+using Microsoft.Extensions.Options;
 
 namespace CasAuthenticationMiddleware
 {
@@ -15,10 +15,10 @@ namespace CasAuthenticationMiddleware
             RequestDelegate next,
             IDataProtectionProvider dataProtectionProvider,
             ILoggerFactory loggerFactory,
-            IUrlEncoder urlEncoder,
+            UrlEncoder urlEncoder,
             IOptions<SharedAuthenticationOptions> sharedOptions,
             TOptions options)
-            : base(next, options, loggerFactory, urlEncoder)
+            : base(next, Microsoft.Extensions.Options.Options.Create(options), loggerFactory, urlEncoder)
         {
             if (next == null)
             {
