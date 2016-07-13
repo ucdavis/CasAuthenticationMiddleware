@@ -3,14 +3,26 @@
   "title": "Cas Authentication Middleware",
   "description": "Cas Authentication Middleware",
   "authors": [ "Scott Kirkland" ],
-  "tags": [ "" ],
-  "projectUrl": "https://github.com/ucdavis/CasAuthenticationMiddleware",
-  "licenseUrl": "https://github.com/ucdavis/CasAuthenticationMiddleware/blob/master/LICENSE.txt",
-  "dependencies": {
-    "Microsoft.AspNet.Authentication": "1.0.0-*"
+  "packOptions": {
+    "tags": [ "" ],
+    "projectUrl": "https://github.com/ucdavis/CasAuthenticationMiddleware",
+    "licenseUrl": "https://github.com/ucdavis/CasAuthenticationMiddleware/blob/master/LICENSE.txt",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/ucdavis/CasAuthenticationMiddleware"
+    }
   },
+
+  "dependencies": {
+    "Microsoft.AspNetCore.Authentication": "1.0.0",
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
+    "Microsoft.Extensions.WebEncoders.Core": "1.0.0-rc1-final",
+    "NETStandard.Library": "1.6.0"
+  },
+
   "frameworks": {
-    "net451": { },
-    "dotnet5.4": { }
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
   }
 }
