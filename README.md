@@ -12,11 +12,11 @@ Now,in your Startup.cs file, configure the cookie auth in the `ConfigureServices
 Next, in the `Configure()` method towards the bottom you'll need to configure the cookie authentication and then the actual CAS middleware underneith it.
 
 
-    app.UseCookieAuthentication(options =>
+    app.UseCookieAuthentication(new CookieAuthenticationOptions
     {
-        options.AutomaticAuthenticate = true;
-        options.AutomaticChallenge = true;
-        options.LoginPath = new PathString("/home/caslogin");
+        AutomaticAuthenticate = true,
+        AutomaticChallenge = true,
+        LoginPath = new PathString("/home/caslogin")
     });
 
 
