@@ -14,7 +14,7 @@ namespace CasAuthenticationSample.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(ActiveAuthenticationSchemes = "UCDCAS")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page. "  + User.Identity.Name;

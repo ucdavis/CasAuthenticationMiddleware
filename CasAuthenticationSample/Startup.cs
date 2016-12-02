@@ -67,7 +67,7 @@ namespace CasAuthenticationSample
             {
                 AuthenticationScheme = "UCDCAS",
                 AuthorizationEndpoint = "https://cas.ucdavis.edu/cas/",
-                CallbackPath = new PathString("/Home/caslogin"),
+                CallbackPath = new PathString("/home/caslogin"),
                 DisplayName = "CAS",
                 ClaimsIssuer = "Cas",
                 AutomaticAuthenticate = true,
