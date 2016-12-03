@@ -60,18 +60,14 @@ namespace CasAuthenticationSample
             {
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
-                LoginPath = new PathString("/home/caslogin")
             });
             
             app.UseCasAuthentication(new CasAuthenticationOptions
             {
-                AuthenticationScheme = "UCDCAS",
+                AuthenticationScheme = "ucdcas",
                 AuthorizationEndpoint = "https://cas.ucdavis.edu/cas/",
                 CallbackPath = new PathString("/home/caslogin"),
-                DisplayName = "CAS",
-                ClaimsIssuer = "Cas",
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true
+                DisplayName = "UCD CAS",
             });
 
             app.UseMvc(routes =>

@@ -15,25 +15,21 @@ Next, in the `Configure()` method towards the bottom you'll need to configure th
     app.UseCookieAuthentication(new CookieAuthenticationOptions
     {
         AutomaticAuthenticate = true,
-        AutomaticChallenge = true,
-        LoginPath = new PathString("/home/caslogin")
+        AutomaticChallenge = true
     });
 
 
     app.UseCasAuthentication(new CasAuthenticationOptions
     {
-        AuthenticationScheme = "UCDCAS",
+        AuthenticationScheme = "ucdcas",
         AuthorizationEndpoint = "https://cas.ucdavis.edu/cas/",
         CallbackPath = new PathString("/home/caslogin"),
-        DisplayName = "CAS",
-        ClaimsIssuer = "Cas",
-        AutomaticAuthenticate = true,
-        AutomaticChallenge = true
+        DisplayName = "UCD CAS"
     });
 
 Finally, you can protect your resources in several different ways using the standard .NET Security methods.
 
-For ASP.NET MVC, you'll probably just want to use `[Authorize(ActiveAuthenticationSchemes = "UCDCAS")]`.
+For ASP.NET MVC, you'll probably just want to use `[Authorize(ActiveAuthenticationSchemes = "ucdcas")]`.
 
 If you'd rather perform the authentication challenge in code, you can always do `await context.Authentication.ChallengeAsync("UCDCAS");`.  If you have multiple authentication systems this is a great way to segment user authentication in different parts of your app, or just to let your users decide how they want to log in.
 
