@@ -24,13 +24,17 @@ Next, in the `Configure()` method towards the bottom you'll need to configure th
     {
         AuthenticationScheme = "UCDCAS",
         AuthorizationEndpoint = "https://cas.ucdavis.edu/cas/",
-        CallbackPath = new PathString("/Home/caslogin"),
+        CallbackPath = new PathString("/home/caslogin"),
         DisplayName = "CAS",
         ClaimsIssuer = "Cas",
         AutomaticAuthenticate = true,
         AutomaticChallenge = true
     });
 
-Make sure the loginPath for cookie authentication and the callback path for CAS Authentication match.
+Finally, you can protect your resources in several different ways using the standard .NET Security methods.
+
+For ASP.NET MVC, you'll probably just want to use `[Authorize(ActiveAuthenticationSchemes = "UCDCAS")]`.
+
+If you'd rather perform the authentication challenge in code, you can always do `await context.Authentication.ChallengeAsync("UCDCAS");`.  If you have multiple authentication systems this is a great way to segment user authentication in different parts of your app, or just to let your users decide how they want to log in.
 
 That's it, enjoy!
