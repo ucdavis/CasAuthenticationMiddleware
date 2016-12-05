@@ -3,7 +3,7 @@
 ## Integration
 _* See the included CasAuthenticationSample project for full details._
 
-We're going to use the Cookie Authentication Middleware to store our claim credentials so first you might need to include the `Microsoft.AspNet.Authentication.Cookies` package.
+We're going to use the Cookie Authentication Middleware to store our claim credentials so first you might need to include the `Microsoft.AspNetCore.Authentication.Cookies` package.
 
 Now,in your Startup.cs file, configure the cookie auth in the `ConfigureServices()` method.
 
