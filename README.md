@@ -1,5 +1,7 @@
 # CAS Authentication Middleware for ASPNET 5.0
 
+# DEPRECATED, USE https://github.com/IUCrimson/AspNet.Security.CAS instead.
+
 ## Integration
 _* See the included CasAuthenticationSample project for full details._
 
